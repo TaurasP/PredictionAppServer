@@ -26,11 +26,13 @@ public class GradePredictionController {
 
     public GradePredictionController() throws Exception {
         // Load the trained model
-        this.tree = (J48) SerializationHelper.read("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/grade-model.model");
+//        this.tree = (J48) SerializationHelper.read("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/grade-model.model");
+        this.tree = (J48) SerializationHelper.read("C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\trained_models\\grade-model.model");
 
         // Load the dataset to set the class attribute
         CSVLoader loader = new CSVLoader();
-        loader.setSource(new File("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/stud_grade_training_data.csv"));
+//        loader.setSource(new File("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/stud_grade_training_data.csv"));
+        loader.setSource(new File("C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\stud_grade_training_data.csv"));
         this.data = loader.getDataSet();
         this.data.setClassIndex(data.numAttributes() - 1);
     }

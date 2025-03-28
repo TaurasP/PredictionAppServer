@@ -11,7 +11,8 @@ import java.io.File;
 public class TrainGradePrediction {
     public static void main(String[] args) {
 
-        var path = "/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/stud_grade_training_data.csv";
+//        var path = "/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/stud_grade_training_data.csv";
+        var path = "C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\stud_grade_training_data.csv";
         try {
             CSVLoader loader = new CSVLoader();
             loader.setSource(new File(path));
@@ -23,7 +24,8 @@ public class TrainGradePrediction {
             J48 tree = new J48();
             tree.buildClassifier(data);
 
-            var outputPath = "/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/grade-model.model";
+//            var outputPath = "/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/grade-model.model";
+            var outputPath = "C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\trained_models\\grade-model.model";
             SerializationHelper.write(outputPath, tree);
             System.out.println("Prediction model trained!!!");
         } catch (Exception e) {

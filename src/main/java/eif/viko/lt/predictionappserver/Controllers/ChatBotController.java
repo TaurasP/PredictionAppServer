@@ -23,7 +23,8 @@ public class ChatBotController {
     private DoccatModel model;
 
     public ChatBotController() throws IOException {
-        InputStream customModel = new FileInputStream("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/chatbot-model.bin");
+//        InputStream customModel = new FileInputStream("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/chatbot-model.bin");
+        InputStream customModel = new FileInputStream("C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\trained_models\\chatbot-model.bin");
         model = new DoccatModel(customModel);
     }
 
