@@ -1,6 +1,5 @@
 package eif.viko.lt.predictionappserver.Controllers;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import opennlp.tools.doccat.DoccatModel;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/chatbot")
@@ -23,8 +22,7 @@ public class ChatBotController {
     private DoccatModel model;
 
     public ChatBotController() throws IOException {
-//        InputStream customModel = new FileInputStream("/Users/tauras/Documents/Projects/Java/PredictionAppServer/src/main/resources/static/trained_models/chatbot-model.bin");
-        InputStream customModel = new FileInputStream("C:\\Users\\Tauras\\Documents\\Projects\\Java\\PredictionAppServer\\src\\main\\resources\\static\\trained_models\\chatbot-model.bin");
+        InputStream customModel = new FileInputStream(Paths.get("src/main/resources/static/trained_models/chatbot-model.bin").toFile());
         model = new DoccatModel(customModel);
     }
 
