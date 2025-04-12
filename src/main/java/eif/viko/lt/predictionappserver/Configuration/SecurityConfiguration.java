@@ -3,17 +3,13 @@ package eif.viko.lt.predictionappserver.Configuration;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -68,7 +64,7 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Set allowed origins. For a desktop app, this could be a localhost address
-        configuration.setAllowedOrigins(List.of("http://localhost:8005")); // Adjust if your desktop app has a different origin
+        configuration.setAllowedOrigins(List.of("http://localhost:9090")); // Adjust if your desktop app has a different origin
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Include any methods your app may use
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Allow necessary headers
         configuration.setAllowCredentials(true); // Allows credentials (cookies, authorization headers) to be sent

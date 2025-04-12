@@ -36,11 +36,6 @@ public class GradePredictionController {
 
     @PostMapping("/grade")
     public ResponseEntity<String> predictGrade(@RequestBody Student student) {
-//        student.setAttendance(85);
-//        student.setAssignments(80);
-//        student.setMidterm(75);
-//        student.setFinalExam(85);
-//        System.out.println("/api/predict/grade is called");
         try {
             // Create a new student instance
             Instance studentInstance = new DenseInstance(data.numAttributes());
@@ -53,7 +48,6 @@ public class GradePredictionController {
             // Predict the final grade
             double prediction = tree.classifyInstance(studentInstance);
             String predictedGrade = data.classAttribute().value((int) prediction);
-//            System.out.println("Predicted grade: " + predictedGrade);
             return ResponseEntity.ok(predictedGrade);
 
         } catch (Exception e) {
