@@ -1,6 +1,5 @@
 package eif.viko.lt.predictionappserver.Configuration;
 
-
 import eif.viko.lt.predictionappserver.Repositories.ChatUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

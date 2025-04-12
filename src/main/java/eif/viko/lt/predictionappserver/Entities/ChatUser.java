@@ -62,4 +62,12 @@ public class ChatUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public ChatUser(Long id, String email, String password, boolean enabled, Role role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.role = role;
+    }
 }

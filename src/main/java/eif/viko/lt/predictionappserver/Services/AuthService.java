@@ -32,11 +32,10 @@ public class AuthService {
 
         ChatUser chatUser = new ChatUser(
                 null,
-                input.getUsername(),
                 input.getEmail(),
                 passwordEncoder.encode(input.getPassword()),
                 true,
-                Role.USER
+                input.getRole()
         );
 
         return userRepository.save(chatUser);

@@ -1,6 +1,7 @@
 package eif.viko.lt.predictionappserver.Dto;
 
 
+import eif.viko.lt.predictionappserver.Entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,6 @@ public class RegisterRequestDto {
 
     private String email;
     private String password;
-    private String username;
+    private Role role;
 
 }

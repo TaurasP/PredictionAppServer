@@ -5,6 +5,7 @@ import eif.viko.lt.predictionappserver.Dto.LoginResponseDto;
 import eif.viko.lt.predictionappserver.Dto.LoginRequestDto;
 import eif.viko.lt.predictionappserver.Dto.RegisterRequestDto;
 import eif.viko.lt.predictionappserver.Entities.ChatUser;
+import eif.viko.lt.predictionappserver.Repositories.ChatUserRepository;
 import eif.viko.lt.predictionappserver.Services.AuthService;
 import eif.viko.lt.predictionappserver.Services.JwtService;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,12 @@ public class AuthController {
 
     private final AuthService authenticationService;
 
-    public AuthController(JwtService jwtService, AuthService authenticationService) {
+    private final ChatUserRepository userRepository;
+
+    public AuthController(JwtService jwtService, AuthService authenticationService, ChatUserRepository userRepository) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/signup")
@@ -38,18 +42,21 @@ public class AuthController {
 //    }
 
 
-
-
-
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginRequestDto loginUserDto) {
         ChatUser authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
+        ChatUser chatUser = userRepository.findByEmail(loginUserDto.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + loginUserDto.getEmail()));
         LoginResponseDto loginResponse = new LoginResponseDto(
-                jwtService.getExpirationTime(), jwtToken
+                jwtService.getExpirationTime(),
+                jwtToken,
+                chatUser.getEmail(),
+                chatUser.getRole().name()
         );
+        System.out.println(loginResponse);
 
         return ResponseEntity.ok(loginResponse);
     }

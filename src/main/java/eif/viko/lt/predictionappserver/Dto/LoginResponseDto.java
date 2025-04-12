@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDto {
     private long expiration;
     private String token;
+    private String email;
+    private String role;
 }
