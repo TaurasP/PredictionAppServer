@@ -43,6 +43,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/v2/api-docs/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/predict/**").authenticated()
+                        .requestMatchers("/api/student-courses/**").authenticated()
+                        .requestMatchers("/api/courses/**").authenticated()
                         .anyRequest().authenticated()  // Require authentication for everything else
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
