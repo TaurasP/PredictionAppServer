@@ -1,15 +1,19 @@
 package eif.viko.lt.predictionappserver.Controllers;
 
 import eif.viko.lt.predictionappserver.Dto.CourseRequestDto;
+import eif.viko.lt.predictionappserver.Dto.CourseResponseDto;
 import eif.viko.lt.predictionappserver.Entities.ChatUser;
 import eif.viko.lt.predictionappserver.Entities.Course;
 import eif.viko.lt.predictionappserver.Repositories.ChatUserRepository;
 import eif.viko.lt.predictionappserver.Services.CourseService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.generateEmail;
 
@@ -37,5 +41,10 @@ public class CourseController {
     public ResponseEntity<String> saveCourse(@RequestBody Course course) {
         Course savedCourse = courseService.saveCourse(course);
         return ResponseEntity.ok("Saved course: " + savedCourse.getName());
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<CourseResponseDto>> getAllCourses() {
+        return ResponseEntity.ok(courseService.getCourses());
     }
 }
