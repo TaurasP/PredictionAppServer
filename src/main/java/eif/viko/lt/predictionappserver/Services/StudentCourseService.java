@@ -50,7 +50,6 @@ public class StudentCourseService {
         // Save the updated StudentCourse back to the repository
         studentCourseRepository.save(studentCourse);
 
-
         predictedGradeHistoryRepository.save(new PredictedGradeHistory(
                 studentCourse.getAttendance(),
                 studentCourse.getAssignments(),
@@ -89,8 +88,6 @@ public class StudentCourseService {
             sortedStudents.forEach(it -> it.setRowId(sortedStudents.indexOf(it) + 1));
             return sortedStudents;
         } catch (Exception e) {
-            // Log the exception
-//            log.error("Error fetching student courses", e);
             throw new RuntimeException("Could not fetch student courses");
         }
     }
