@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.generateEmail;
+
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {
@@ -23,12 +25,12 @@ public class CourseController {
         this.chatUserRepository = chatUserRepository;
     }
 
-    // POST request to save a course
     @PostMapping("/teacher")
     public ResponseEntity<String> saveCourseFromTeacherName(@RequestBody CourseRequestDto course) {
-        ChatUser teacher = chatUserRepository.findByEmail(course.getTeacher()).orElseThrow(() -> new IllegalArgumentException("Teacher not found with email: " + course.getTeacher()));
-        Course savedCourse = courseService.saveCourse(new Course(null, course.getName(), teacher));
-        return ResponseEntity.ok("Saved course: " + savedCourse.getName());
+        String teacherEmail = generateEmail(course.getTeacherName(), course.getTeacherSurname());
+        ChatUser teacher = chatUserRepository.findByEmail(teacherEmail).orElseThrow(() -> new IllegalArgumentException("Teacher not found with email: " + teacherEmail));
+        courseService.saveCourse(new Course(null, course.getCourseName(), teacher));
+        return ResponseEntity.ok("Course saved successfully");
     }
 
     @PostMapping

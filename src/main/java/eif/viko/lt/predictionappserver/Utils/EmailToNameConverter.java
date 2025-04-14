@@ -32,4 +32,8 @@ public class EmailToNameConverter {
         }
         return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
+
+    public static String generateEmail(String name, String surname) {
+        return name.toLowerCase() + "." + surname.toLowerCase() + "@viko.lt";
+    }
 }

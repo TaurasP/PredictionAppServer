@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CourseRequestDto {
 
-    private String name;
-    private String teacher;
+    private String courseName;
+    private String teacherName;
+    private String teacherSurname;
 
 }
