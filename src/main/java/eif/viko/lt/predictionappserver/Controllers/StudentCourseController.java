@@ -1,5 +1,6 @@
 package eif.viko.lt.predictionappserver.Controllers;
 
+import eif.viko.lt.predictionappserver.Dto.StudentCourseRequestDto;
 import eif.viko.lt.predictionappserver.Dto.StudentCourseResponseDto;
 import eif.viko.lt.predictionappserver.Entities.StudentCourse;
 import eif.viko.lt.predictionappserver.Services.StudentCourseService;
@@ -19,11 +20,19 @@ public class StudentCourseController {
         this.studentCourseService = studentCourseService;
     }
 
-    // POST request to save a StudentCourse
     @PostMapping
     public ResponseEntity<StudentCourse> saveStudentCourse(@RequestBody StudentCourse studentCourse) {
         StudentCourse savedStudentCourse = studentCourseService.saveStudentCourse(studentCourse);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedStudentCourse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateStudentCourse(
+            @PathVariable Long id,
+            @RequestBody StudentCourseRequestDto studentCourseRequestDto) {
+
+        return ResponseEntity.ok(studentCourseService.updateStudentCourseById(
+                id, studentCourseRequestDto));
     }
 
     // GET request to find all StudentCourse records
@@ -48,19 +57,6 @@ public class StudentCourseController {
         List<StudentCourse> studentCourses = studentCourseService.findAllByStudentId(studentId);
         return ResponseEntity.ok(studentCourses);
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<StudentCourse> updateStudentCourse(
-            @PathVariable Long id,
-            @RequestParam String grade,
-            @RequestParam double attendance,
-            @RequestParam double assignments,
-            @RequestParam double midterm,
-            @RequestParam double finalExam) {
-        StudentCourse updatedStudentCourse = studentCourseService.updateStudentCourse(id, grade, attendance, assignments, midterm, finalExam);
-        return ResponseEntity.ok(updatedStudentCourse);
-    }
-
 
 }
 

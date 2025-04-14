@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/predict/**").authenticated()
                         .requestMatchers("/api/student-courses/**").authenticated()
+                        .requestMatchers("/api/users/**").authenticated()
                         .requestMatchers("/api/courses/**").authenticated()
                         .anyRequest().authenticated()  // Require authentication for everything else
                 )
