@@ -4,7 +4,6 @@ import eif.viko.lt.predictionappserver.Dto.StudentCourseRequestDto;
 import eif.viko.lt.predictionappserver.Dto.StudentCourseResponseDto;
 import eif.viko.lt.predictionappserver.Entities.StudentCourse;
 import eif.viko.lt.predictionappserver.Services.StudentCourseService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +20,8 @@ public class StudentCourseController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentCourse> saveStudentCourse(@RequestBody StudentCourse studentCourse) {
-        StudentCourse savedStudentCourse = studentCourseService.saveStudentCourse(studentCourse);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedStudentCourse);
+    public ResponseEntity<String> saveStudentCourse(@RequestBody StudentCourseRequestDto studentCourse) {
+        return ResponseEntity.ok(studentCourseService.saveStudentCourse(studentCourse));
     }
 
     @PutMapping("/{id}")

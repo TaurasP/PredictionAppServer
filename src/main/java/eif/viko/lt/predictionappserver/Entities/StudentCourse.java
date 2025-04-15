@@ -35,4 +35,10 @@ public class StudentCourse {
     @JoinColumn(name = "teacher_id")
     private ChatUser teacher;
 
+    public StudentCourse(LocalDateTime date, Course course, ChatUser student, ChatUser teacher) {
+        this.date = date;
+        this.course = course;
+        this.student = student;
+        this.teacher = teacher;
+    }
 }

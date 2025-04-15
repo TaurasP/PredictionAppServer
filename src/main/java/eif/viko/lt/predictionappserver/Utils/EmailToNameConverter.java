@@ -36,4 +36,26 @@ public class EmailToNameConverter {
     public static String generateEmail(String name, String surname) {
         return name.toLowerCase() + "." + surname.toLowerCase() + "@viko.lt";
     }
+
+    public static String extractName(String fullName) {
+        if (fullName == null || fullName.isBlank()) {
+            throw new IllegalArgumentException("Input fullName cannot be null or blank");
+        }
+        String[] parts = fullName.trim().split("\\s+");
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("Input fullName must contain at least two words");
+        }
+        return parts[1];
+    }
+
+    public static String extractSurname(String fullName) {
+        if (fullName == null || fullName.isBlank()) {
+            throw new IllegalArgumentException("Input fullName cannot be null or blank");
+        }
+        String[] parts = fullName.trim().split("\\s+");
+        if (parts.length < 2) {
+            throw new IllegalArgumentException("Input fullName must contain at least two words");
+        }
+        return parts[0];
+    }
 }

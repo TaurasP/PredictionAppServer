@@ -4,6 +4,8 @@ import eif.viko.lt.predictionappserver.Dto.StudentCourseRequestDto;
 import eif.viko.lt.predictionappserver.Dto.StudentCourseResponseDto;
 import eif.viko.lt.predictionappserver.Entities.PredictedGradeHistory;
 import eif.viko.lt.predictionappserver.Entities.StudentCourse;
+import eif.viko.lt.predictionappserver.Repositories.ChatUserRepository;
+import eif.viko.lt.predictionappserver.Repositories.CourseRepository;
 import eif.viko.lt.predictionappserver.Repositories.PredictedGradeHistoryRepository;
 import eif.viko.lt.predictionappserver.Repositories.StudentCourseRepository;
 import eif.viko.lt.predictionappserver.Utils.DateFormatter;
@@ -14,7 +16,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static eif.viko.lt.predictionappserver.Utils.DateFormatter.formatDateTime;
-import static eif.viko.lt.predictionappserver.Utils.DateFormatter.formatDateTimeToString;
+import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.extractName;
+import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.extractSurname;
+import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.generateEmail;
 import static eif.viko.lt.predictionappserver.Utils.EmailToNameConverter.getNameFromEmail;
 
 @Service
@@ -23,14 +27,29 @@ public class StudentCourseService {
     private final StudentCourseRepository studentCourseRepository;
 
     private final PredictedGradeHistoryRepository predictedGradeHistoryRepository;
+    private final ChatUserRepository chatUserRepository;
+    private final CourseRepository courseRepository;
 
-    public StudentCourseService(StudentCourseRepository studentCourseRepository, PredictedGradeHistoryRepository predictedGradeHistoryRepository) {
+    public StudentCourseService(StudentCourseRepository studentCourseRepository, PredictedGradeHistoryRepository predictedGradeHistoryRepository, ChatUserRepository chatUserRepository, CourseRepository courseRepository) {
         this.studentCourseRepository = studentCourseRepository;
         this.predictedGradeHistoryRepository = predictedGradeHistoryRepository;
+        this.chatUserRepository = chatUserRepository;
+        this.courseRepository = courseRepository;
     }
 
-    public StudentCourse saveStudentCourse(StudentCourse studentCourse) {
-        return studentCourseRepository.save(studentCourse);
+    public String saveStudentCourse(StudentCourseRequestDto studentCourse) {
+        String studentEmail = generateEmail(extractName(studentCourse.getStudentName()), extractSurname(studentCourse.getStudentName()));
+        String teacherEmail = generateEmail(extractName(studentCourse.getTeacherName()), extractSurname(studentCourse.getTeacherName()));
+
+        StudentCourse newStudentCourse = new StudentCourse(
+                formatDateTime(LocalDateTime.now()),
+                courseRepository.findByName(studentCourse.getCourseName()).orElseThrow(() -> new ResourceNotFoundException("Course not found by name: " + studentCourse.getCourseName())),
+                chatUserRepository.findByEmail(studentEmail).orElseThrow(() -> new ResourceNotFoundException("Student not found by email: " + studentEmail)),
+                chatUserRepository.findByEmail(teacherEmail).orElseThrow(() -> new ResourceNotFoundException("Teacher not found by email: " + teacherEmail))
+        );
+        
+        studentCourseRepository.save(newStudentCourse);
+        return "Saved student with id " + studentCourse.getId();
     }
 
     public String updateStudentCourseById(Long id, StudentCourseRequestDto studentCourseRequestDto) {

@@ -16,5 +16,8 @@ public class StudentCourseRequestDto {
     private double finalExam;
     private String grade;
     private String predictedGrade;
+    private String courseName;
+    private String studentName;
+    private String teacherName;
 
 }
