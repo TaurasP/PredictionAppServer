@@ -1,7 +1,7 @@
 package eif.viko.lt.predictionappserver.Controllers;
 
+import eif.viko.lt.predictionappserver.Dto.ChatUserResponseDto;
 import eif.viko.lt.predictionappserver.Entities.ChatUser;
-import eif.viko.lt.predictionappserver.Entities.Role;
 import eif.viko.lt.predictionappserver.Services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/role/{role}")
-    public ResponseEntity<List<ChatUser>> findAllChatUsersByRole(@PathVariable String role) {
+    public ResponseEntity<List<ChatUserResponseDto>> findAllChatUsersByRole(@PathVariable String role) {
         return ResponseEntity.ok(userService.findAllChatUsersByRole(role));
     }
 }
