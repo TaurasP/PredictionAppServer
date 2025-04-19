@@ -33,7 +33,7 @@ public class TrainChatBot {
         // Trained model output path
         var outputPath = "src/main/resources/static/trained_models";
 
-        try(OutputStream out = new FileOutputStream(outputPath+"\\chatbot-model.bin")) {
+        try(OutputStream out = new FileOutputStream(outputPath+"/chatbot-model.bin")) {
             model.serialize(out);
         }
         System.out.println("Model training complete!!!");

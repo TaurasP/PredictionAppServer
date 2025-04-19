@@ -1,4 +1,46 @@
-__label__syntax Kas yra kintamasis Java?
-__label__oop Kas yra paveldėjimas Java?
-__label__exception Kas yra išimtis Java kalboje?
-__label__spring Kaip sukurti REST API su Spring Boot?
+__label__variables kintamasis
+__label__variables kintamieji
+__label__inheritance paveldėjimas
+__label__inheritance paveldejimas
+__label__exception išimtis
+__label__exception išimtys
+__label__exception isimtis
+__label__exception isimtys
+__label__rest rest
+__label__rest rest api
+__label__spring springboot
+__label__spring spring boot
+__label__method funkcija
+__label__method funkcijos
+__label__method metodas
+__label__method metodai
+__label__constructor konstruktorius
+__label__constructor konstruktoriai
+__label__polymorphism polimorfizmas
+__label__polymorphism polymorfizmas
+__label__abstract abstrakcija
+__label__abstract abstraktu
+__label__abstract abstraktus
+__label__lambda lambda
+__label__comment komentaras
+__label__comment komentarai
+__label__types tipai
+__label__types data tipai
+__label__arrays masyvas
+__label__arrays masyvai
+__label__arrays arejus
+__label__arrays arėjus
+__label__threads gija
+__label__threads gijos
+__label__while while
+__label__while while ciklas
+__label__for for
+__label__for for ciklas
+__label__switch switch
+__label__if if
+__label__if if else
+__label__if else
+__label__if sąlyga
+__label__if salyga
+__label__if sąlygos
+__label__if salygos
